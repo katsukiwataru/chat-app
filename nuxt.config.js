@@ -27,7 +27,7 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/sanitize.css'
+    '~/assets/base.css'
   ],
 
   /*
