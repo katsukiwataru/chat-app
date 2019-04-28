@@ -1,9 +1,6 @@
-<template>
-  <div>
-    <div class="wrapper">
-      <nuxt class="container" />
-    </div>
-  </div>
+<template lang="pug">
+.wrapper
+  nuxt.container
 </template>
 
 <script>
