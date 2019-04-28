@@ -12,6 +12,13 @@ module.exports = {
     ]
   },
   loading: { color: '#3B8070' },
+  modules: [
+    '@nuxtjs/pwa'
+  ],
+  manifest: {
+    name: 'project-name',
+    lang: 'ja'
+  },
   build: {
     publicPath: '/assets/',
     extractCSS: true,
