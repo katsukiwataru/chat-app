@@ -1,28 +1,29 @@
 <template lang="pug">
-div
-  header
-    h1.title chat app
+  div
     .login(
-      v-if="user"
       key="login"
-    )
+    ) user
+    .buttons
       button(
         type="button"
+        @click="doLogout"
       ) ログアウト
-    .login(
-      v-else
-      key="logout"
-    )
+    .logiut(
+        key="logout"
+      )
       button(
         type="button"
+        @click="doLogin"
       ) ログイン
 </template>
 
 <script>
+
 export default {
-  data() {
-    return {
-      user: {}
+  methods: {
+    doLogout () {
+    },
+    doLogin () {
     }
   },
 }
