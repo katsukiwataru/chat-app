@@ -37,5 +37,19 @@
     "eslint-loader": "^2.1.1",
     "eslint-plugin-vue": "^4.0.0",
     "node-sass": "^4.12.0"
-  }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "main": "nuxt.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katsukiwataru/chat-app.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katsukiwataru/chat-app/issues"
+  },
+  "homepage": "https://github.com/katsukiwataru/chat-app#readme"
 }
