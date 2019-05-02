@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       isLogin: false,
-      user: [],
+      user: []
     }
   },
   beforeMount () {
@@ -38,10 +38,11 @@ export default {
     twitterLogin () {
       const provider = new firebase.auth.TwitterAuthProvider()
       firebase.auth().signInWithPopup(provider)
+      this.$router.push({ name: 'chat', params: { loginName: this.user.displayName }})
     },
     logout () {
       firebase.auth().signOut()
-    },
+    }
   },
 }
 </script>

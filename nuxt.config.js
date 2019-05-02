@@ -39,6 +39,13 @@ export default {
   /*
   ** Nuxt.js modules
   */
+  render: {
+    bundleRenderer: {
+      shouldPreload: (file, type) => {
+        return ['script', 'style', 'font'].includes(type)
+      }
+    }
+  },
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',

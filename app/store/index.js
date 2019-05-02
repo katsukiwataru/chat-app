@@ -1,21 +1,27 @@
-export const state = () => ({
-  user: null,
-})
+// export const state = () => ({
+//   user: null,
+//   isLoggedIn: false,
+//   messages: []
+// })
 
-export const mutations = {
-  setUser(state, payload) {
-    state.user = payload
-  }
-}
+// export const getters = {
+//   user: state => state.user,
+//   isLoggedIn: state => state.isLoggedIn,
+//   getMessages: state => state.messages
+// }
 
-export const actions = {
-  setUser({ commit }, payload) {
-    commit('setUser', payload)
-  }
-}
+// export const mutations = {
+//   setUser(state, { user }) {
+//     state.user = user
+//     state.isLoggedIn = true
+//   },
+//   updateUser(state, { user }) {
+//     state.user = user
+//   }
+// }
 
-export const getters = {
-  isAuthenticated(state) {
-    return !!state.user
-  }
-}
+// export const actions = {
+//   register({ commit }) {
+//     commit('setUser', { user })
+//   }
+// }
