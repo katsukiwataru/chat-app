@@ -2,6 +2,9 @@ import firebase from 'firebase/app'
 
 import "firebase/auth"
 import "firebase/firestore"
+import "firebase/database"
+import "firebase/messaging"
+import "firebase/functions"
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
