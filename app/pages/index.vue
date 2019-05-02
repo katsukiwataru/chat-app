@@ -1,39 +1,25 @@
 <template lang="pug">
-.inner
-  .header
-    h1 message app
-    .isLogin(
-      v-if="!isLogin"
-    )
-      button.LoginButton(@click="twitterLogin") Twitterでログインする
-    .isLogout(v-else)
-      p.userName {{ user.displayName }}
-      button.LogoutButton(@click="logout") ログアウト
-  //- button.test(@click="() => test()") test
-  .textArea
-    p.textBox
-      input.messageInput(
-        type='text'
-        placeholder="メッセージ内容を入力してください"
-        ref="messageBox"
-        @input="(e) => updataInput(e)"
-        @keyup="(e) => submitData(e)"
-      )
-
+.contents
+  .buttons
+    ul.headerNavigation.isLogin(v-if="!isLogin")
+      li.headerNavigationItem(@click="twitterLogin") ログインする
+    ul.headerNavigation.isLogout(v-else)
+      li.headerNavigationItem(@click="logout") ログアウト
+  nav.nav
+    ul
+      li.userName {{ user.displayName }}
+      li
+        nuxt-link(to="/chat/") chat
 </template>
 
 <script>
 import firebase from '~/plugins/firebase'
 
 export default {
-  components: {
-  },
   data () {
     return {
       isLogin: false,
       user: [],
-      chatData: [],
-      message: ""
     }
   },
   beforeMount () {
@@ -56,71 +42,24 @@ export default {
     logout () {
       firebase.auth().signOut()
     },
-    submitData (e) {
-      if (e.keyCode === 13) {
-        const uid = firebase.auth().currentUser.uid
-        const newPostKey = firebase.database().ref().child('posts').push().key
-        firebase.database().ref(`user/${uid}/${newPostKey}`).set({
-          message: this.message,
-        })
-        this.resetInput(e)
-      }
-    },
-    updataInput (e) {
-      this.message = e.target.value
-    },
-    resetInput (e) {
-      e.target.value = ""
-    },
-    test () {
-      // const reference = firebase.database().ref().child('user')
-      // reference.on('child_added', (snapshot) => {
-      //   console.log(snapshot, reference, firebase.auth().currentUser.uid, firebase.database().ref().child('user').key)
-      // })
-      // const uid = firebase.auth().currentUser.uid
-      // const postData = {
-      //   author: "username",
-      // }
-      // const newPostKey = firebase.database().ref().child('posts').push().key
-      // console.log(newPostKey)
-      // const updates = {}
-      // updates[`user/${uid}/${newPostKey}`] = postData
-      // return firebase.database().ref().update(updates)
-    }
-  }
+  },
 }
 </script>
 
 <style lang="scss">
-.inner {
-  & button {
-    border: none;
-    font-size: 16px;
-  }
-  & .header {
-    margin: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  & .textArea {
-    width: 80%;
-    height: 70vh;
-    margin: 0 auto;
-    position: relative;
-    & .textBox {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      overflow: scroll;
-      width: 100%;
-      & .messageInput {
-        width: 100%;
-      }
+button {
+  border: none;
+  font-size: 16px;
+}
+.buttons {
+  margin: 50px;
+  text-align: center;
+  .headerNavigation {
+    .headerNavigationItem {
+      padding: 20px 40px;
+      border-radius: 10px;
+      box-shadow: 1px 1px 5px 1px #999;
     }
-  }
-  & .isLogout {
-    display: flex;
   }
 }
 </style>
