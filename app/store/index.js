@@ -23,6 +23,9 @@ export const mutations = {
   deleteUser() {
     state.user = null
     state.isLoggedIn = false
+  },
+  updataMessage(state, messages) {
+    state.messages = messages
   }
 }
 
@@ -35,13 +38,20 @@ export const actions = {
     firebase.auth().signOut()
     dispatch('twitterAuthStateChanged')
   },
-  twitterAuthStateChanged({ dispatch, commit }) {
+  twitterAuthStateChanged({ commit }) {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         commit('setUser', user)
       } else {
         commit('deleteUser')
       }
+    })
+  },
+  fetchMessagesData({ commit }) {
+    const uid = firebase.auth().currentUser.uid
+    const reference = firebase.database().ref(`user/${uid}`)
+    reference.on('value', (snapshot) => {
+      commit('updataMessage', snapshot.val())
     })
   }
 }
