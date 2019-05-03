@@ -13,10 +13,14 @@
       @input="(e) => updataInput(e)"
       @keyup="(e) => submitData(e)"
     )
+    p(
+      v-for="messain in getMessages"
+    ) {{ messain }}
 </template>
 
 <script>
 import firebase from '~/plugins/firebase'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -30,11 +34,14 @@ export default {
       val: {}
     }
   },
+  computed: {
+    ...mapGetters(['getMessages'])
+  },
   beforeMount () {
     firebase.auth().onAuthStateChanged(user =>{
       if (user) {
         this.isLogin = true
-        this.user = user
+        this.user = use
       } else {
         this.isLogin = false
         this.user = []
@@ -43,13 +50,6 @@ export default {
     })
   },
   methods: {
-    twitterLogin () {
-      const provider = new firebase.auth.TwitterAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-    },
-    logout () {
-      firebase.auth().signOut()
-    },
     submitData (e) {
       if (e.keyCode === 13) {
         const uid = firebase.auth().currentUser.uid
@@ -57,7 +57,12 @@ export default {
         firebase.database().ref(`user/${uid}/${newPostKey}`).set({
           message: this.message,
         })
-        this.test()
+        // const messageRef = firebase.firestore().collection("cities").doc("SF")
+        // .then((doc)=>{
+        //   console.log("Document data:", doc.data())
+        // })
+        // console.log(messageRef)
+        this.fetch()
         this.resetInput(e)
       }
     },
@@ -67,7 +72,7 @@ export default {
     resetInput (e) {
       e.target.value = ""
     },
-    test () {
+    fetch () {
       const uid = firebase.auth().currentUser.uid
       const reference = firebase.database().ref(`user/${uid}`)
       reference.on('value', (snapshot) => {
