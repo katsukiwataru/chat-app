@@ -1,13 +1,14 @@
 <template lang="pug">
 .contents
   .buttons
-    ul.headerNavigation.isLogin(v-if="!isLogin")
+    ul.headerNavigation.isLogin(v-if="!$store.state.isLoggedIn")
       li.headerNavigationItem(@click="twitterLogin") ログインする
     ul.headerNavigation.isLogout(v-else)
       li.headerNavigationItem(@click="logout") ログアウト
+  p(@click="test") test
   nav.nav
     ul
-      li.userName {{ user.displayName }}
+      li.userName
       li
         nuxt-link(to="/chat/") chat
 </template>
@@ -18,30 +19,24 @@ import firebase from '~/plugins/firebase'
 export default {
   data () {
     return {
-      isLogin: false,
-      user: []
+      user: {}
     }
   },
   beforeMount () {
-    firebase.auth().onAuthStateChanged(user =>{
-      if (user) {
-        this.isLogin = true
-        this.user = user
-      } else {
-        this.isLogin = false
-        this.user = []
-      }
-      console.log(this.user)
-    })
   },
   methods: {
+    test() {
+      console.log(this.$store.state, firebase)
+    },
     twitterLogin () {
-      const provider = new firebase.auth.TwitterAuthProvider()
-      firebase.auth().signInWithPopup(provider)
-      this.$router.push({ name: 'chat', params: { loginName: this.user.displayName }})
+      // firebase.auth().onAuthStateChanged(account => {
+      //   // this.$store.dispatch('twitterSignIn')
+      //   this.user = account
+      // })
+      this.$store.dispatch('twitterSignIn')
     },
     logout () {
-      firebase.auth().signOut()
+      this.user = this.$store.dispatch('twittersignOut')
     }
   },
 }
