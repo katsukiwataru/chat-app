@@ -5,7 +5,6 @@
       li.headerNavigationItem(@click="twitterLogin") ログインする
     ul.headerNavigation.isLogout(v-else)
       li.headerNavigationItem(@click="logout") ログアウト
-  p(@click="test") test
   nav.nav
     ul
       li.userName
@@ -25,9 +24,6 @@ export default {
   beforeMount () {
   },
   methods: {
-    test() {
-      console.log(this.$store.state, firebase)
-    },
     twitterLogin () {
       // firebase.auth().onAuthStateChanged(account => {
       //   // this.$store.dispatch('twitterSignIn')
