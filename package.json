@@ -17,7 +17,7 @@
     "deploy": "firebase deploy"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/axios": "^5.12.1",
     "cross-env": "^5.2.0",
     "firebase": "^5.10.1",
     "firebase-tools": "^6.7.1",
